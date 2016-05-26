@@ -1,0 +1,105 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../../bower_components/app-layout/app-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+
+
+<link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../../bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="../../bower_components/paper-styles/paper-styles-classes.html">
+
+<link rel="import" href="../guenztal-header/guenztal-header.html">
+<link rel="import" href="../guenztal-cards/guenztal-cards.html">
+
+<dom-module id="guenztal-waschpark-app">
+    <template>
+        <style>
+            :host {
+                display: block;
+
+                --primary-color: #00796B;
+                --default-primary-color: #009688;
+                --light-primary-color: #B2DFDB;
+                --accent-color: var(--paper-red-400);
+
+                --primary-text-color: #212121;
+                --secondary-text-color: #727272;
+                --disabled-text-color: #BDBDBD;
+                --divider-color: #B6B6B6;
+
+                color: var(--primary-text-color);
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            app-header {
+                background-color: #f5f5f5;
+                color: var(--primary-color);
+            }
+
+            span[title] {
+                @apply(--paper-font-title);
+                color: var(--primary-color);
+            }
+
+            paper-tabs {
+                --paper-tabs-selection-bar-color: var(--primary-color);
+                height: 100%;
+            }
+
+            paper-tab {
+                --paper-tab-ink: var(--primary-color);
+            }
+
+            paper-tab[link] a {
+                color: var(--primary-color);
+                @apply(--layout-horizontal);
+                @apply(--layout-center-center);
+
+            }
+
+            guenztal-header {
+                margin-top: 128px;
+                margin-bottom: 128px;
+            }
+
+            @media (min-width: 600px) {
+                guenztal-cards {
+                    margin: 0 20%;
+                }
+            }
+        </style>
+
+        <app-header-layout>
+            <app-header fixed effects="waterfall">
+                <app-toolbar>
+                    <span title>GÜNZTAL WASCHPARK</span>
+
+                    <paper-tabs selected="0" activate-event="">
+                        <paper-tab>HOME</paper-tab>
+                        <paper-tab link>
+                            <a target="_blank" href="https://www.google.com/maps/contrib/112509277802753460018/photos" tabindex="-1">BILDER</a>
+                        </paper-tab>
+                    </paper-tabs>
+                </app-toolbar>
+            </app-header>
+
+            <div class="layout vertical">
+                <guenztal-header></guenztal-header>
+                <guenztal-cards></guenztal-cards>
+            </div>
+        </app-header-layout>
+    </template>
+
+    <script>
+        Polymer({
+
+            is: 'guenztal-waschpark-app',
+
+            properties: {}
+
+        });
+    </script>
+</dom-module>

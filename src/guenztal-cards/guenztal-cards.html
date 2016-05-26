@@ -1,0 +1,114 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="../../bower_components/paper-styles/paper-styles-classes.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
+<dom-module id="guenztal-cards">
+    <template>
+        <style>
+            :host {
+                display: block;
+                @apply(--layout-vertical);
+            }
+
+            paper-card {
+                margin-bottom: 24px;
+            }
+
+            #opening-times {
+
+                --paper-card-header-color: white;
+
+                color: white;
+                background-color: var(--default-primary-color);
+            }
+
+            #warning {
+                background-color: var(--primary-color);
+                @apply(--paper-font-body1);
+                font-size: 13px;
+            }
+
+            #warning > iron-icon {
+                margin-right: 16px;
+            }
+
+            #anfahrt {
+                @apply(--paper-font-body2);
+            }
+
+            #anfahrt paper-button {
+                color: var(--primary-color);
+            }
+            a {
+                text-decoration: none;
+            }
+
+            .time {
+                @apply(--paper-font-code1);
+            }
+        </style>
+
+        <paper-card id="opening-times" heading="ÖFFNUNGSZEITEN">
+            <div class="card-actions layout horizontal time">
+                <span class="flex">Montag</span> <span>06:00 - 22:00</span>
+            </div>
+            <div class="card-actions layout horizontal time">
+                <span class="flex">Dienstag</span> <span>06:00 - 22:00</span>
+            </div>
+            <div class="card-actions layout horizontal time">
+                <span class="flex">Mittwoch</span> <span>06:00 - 22:00</span>
+            </div>
+            <div class="card-actions layout horizontal time">
+                <span class="flex">Donnerstag</span> <span>06:00 - 22:00</span>
+            </div>
+            <div class="card-actions layout horizontal time">
+                <span class="flex">Freitag</span> <span>06:00 - 22:00</span>
+            </div>
+            <div class="card-actions layout horizontal time">
+                <span class="flex">Samstag</span> <span>06:00 - 22:00</span>
+            </div>
+            <div class="card-actions layout horizontal time">
+                <span class="flex">Sonntag</span> <span>12:00 - 18:00</span>
+            </div>
+            <div class="card-actions layout horizontal center" id="warning">
+                <iron-icon icon="warning"></iron-icon>
+                <div>Geschlossen: Neujahr, Karfreitag, Osterfeiertage, 1.
+                    Mai, Pfingstenfeiertage,
+                    Weihnachtsfeiertage
+                </div>
+            </div>
+        </paper-card>
+
+        <paper-card heading="ANFAHRT" id="anfahrt">
+            <div class="card-content">
+                Günztal Waschpark - Müller GbR
+                <br>
+                Eidlerholzstraße 7, 87746 Erkheim
+            </div>
+            <div class="card-actions">
+                <a href="https://www.google.com/maps/dir//48.027255,10.335744/@48.0270565,10.3306283,16z" tabindex="-1" target="_blank">
+                <paper-button>
+                    <iron-icon icon="maps:directions"></iron-icon>
+                    LOS</paper-button>
+                </a>
+            </div>
+        </paper-card>
+    </template>
+
+
+    <script>
+        Polymer({
+
+            is: 'guenztal-cards',
+
+            properties: {}
+
+        });
+    </script>
+</dom-module>
