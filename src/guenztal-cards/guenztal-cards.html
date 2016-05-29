@@ -4,9 +4,12 @@
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 
+<link rel="import" href="../../bower_components/marked-element/marked-element.html">
+<link rel="import" href="../../bower_components/marked-element/marked-import.html">
 
 <link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+<link rel="import" href="../../bower_components/iron-icons/social-icons.html">
 
 <dom-module id="guenztal-cards">
     <template>
@@ -45,14 +48,46 @@
             #anfahrt paper-button {
                 color: var(--primary-color);
             }
+
             a {
                 text-decoration: none;
+            }
+
+            #news {
+                --paper-card-header-image: {
+                    max-height: 196px;
+                }
+            }
+
+            #news iron-icon {
+                color: var(--accent-color);
+            }
+
+            #news .title {
+                @apply(--paper-font-title);
+            }
+
+            #news .body {
+                @apply(--paper-font-body1);
             }
 
             .time {
                 @apply(--paper-font-code1);
             }
         </style>
+
+        <template is="dom-if" if="[[_hasNews(news)]]">
+        <paper-card id="news" image="/images/news.jpg">
+            <template is="dom-repeat" items="[[news]]">
+                <div class="card-content">
+                    <div class="title">
+                        [[item.title]]
+                    </div>
+                    <div class="body">[[item.body]]</div>
+                </div>
+            </template>
+        </paper-card>
+        </template>
 
         <paper-card id="opening-times" heading="ÖFFNUNGSZEITEN">
             <div class="card-actions layout horizontal time">
@@ -92,10 +127,12 @@
                 Eidlerholzstraße 7, 87746 Erkheim
             </div>
             <div class="card-actions">
-                <a href="https://www.google.com/maps/dir//48.027255,10.335744/@48.0270565,10.3306283,16z" tabindex="-1" target="_blank">
-                <paper-button>
-                    <iron-icon icon="maps:directions"></iron-icon>
-                    LOS</paper-button>
+                <a href="https://www.google.com/maps/dir//48.027255,10.335744/@48.0270565,10.3306283,16z" tabindex="-1"
+                   target="_blank">
+                    <paper-button>
+                        <iron-icon icon="maps:directions"></iron-icon>
+                        LOS
+                    </paper-button>
                 </a>
             </div>
         </paper-card>
@@ -107,7 +144,17 @@
 
             is: 'guenztal-cards',
 
-            properties: {}
+            properties: {
+                news: {
+                    type: Array,
+                    value: []
+                }
+            },
+
+            _hasNews: function(news) {
+                if (!news) { return false};
+                return news.length > 0;
+            }
 
         });
     </script>

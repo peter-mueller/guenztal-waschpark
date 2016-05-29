@@ -3,10 +3,11 @@
 <link rel="import" href="../../bower_components/app-layout/app-layout.html">
 <link rel="import" href="../../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
 
-
 <link rel="import" href="../../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../../bower_components/paper-styles/paper-styles.html">
 <link rel="import" href="../../bower_components/paper-styles/paper-styles-classes.html">
+
+<link rel="import" href="../../bower_components/polymerfire/polymerfire.html">
 
 <link rel="import" href="../guenztal-header/guenztal-header.html">
 <link rel="import" href="../guenztal-cards/guenztal-cards.html">
@@ -86,11 +87,19 @@
                 </app-toolbar>
             </app-header>
 
+            <firebase-app auth-domain="guenztal-waschpark.firebaseapp.com"
+                          database-url="https://guenztal-waschpark.firebaseio.com/"
+                          api-key="AIzaSyDK5MIcSP06rWPzjY7qCpmjXM4eKOuRJd4"></firebase-app>
             <div class="layout vertical">
                 <guenztal-header></guenztal-header>
-                <guenztal-cards></guenztal-cards>
+
+                <firebase-document path="/news"
+                                  data="{{news}}">></firebase-document>
+                <guenztal-cards news="[[news]]"></guenztal-cards>
             </div>
         </app-header-layout>
+
+
     </template>
 
     <script>
