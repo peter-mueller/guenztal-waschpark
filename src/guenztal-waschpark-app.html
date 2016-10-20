@@ -1,0 +1,149 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
+<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
+<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
+<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
+
+<link rel="import" href="../bower_components/app-route/app-location.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
+<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
+
+<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
+
+<dom-module id="guenztal-waschpark-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+
+        --primary-color: #00796B;
+        --default-primary-color: #009688;
+        --light-primary-color: #B2DFDB;
+        --accent-color: var(--paper-red-400);
+
+        --primary-text-color: #212121;
+        --secondary-text-color: #727272;
+        --disabled-text-color: #BDBDBD;
+        --divider-color: #B6B6B6;
+
+        color: var(--primary-text-color);
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      app-header {
+        background-color: #f5f5f5;
+        color: var(--primary-color);
+      }
+
+      span[title] {
+        @apply(--paper-font-title);
+        color: var(--primary-color);
+        @apply(--layout-flex);
+      }
+
+      paper-tabs {
+        --paper-tabs-selection-bar-color: var(--primary-color);
+        height: 100%;
+      }
+
+      paper-tab {
+        --paper-tab-ink: var(--primary-color);
+      }
+
+      paper-tab[link] a {
+        color: var(--primary-color);
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+
+      }
+    </style>
+
+    <app-location route="{{route}}"></app-location>
+    <app-route
+            route="{{route}}"
+            pattern="/:page"
+            data="{{routeData}}"
+            tail="{{subroute}}"></app-route>
+
+
+    <firebase-app auth-domain="guenztal-waschpark.firebaseapp.com"
+                  database-url="https://guenztal-waschpark.firebaseio.com/"
+                  api-key="AIzaSyDK5MIcSP06rWPzjY7qCpmjXM4eKOuRJd4"></firebase-app>
+
+
+    <app-header-layout has-scrolling-region fullbleed>
+
+      <app-header fixed effects="waterfall">
+        <app-toolbar>
+          <span title>GÜNZTAL WASCHPARK</span>
+
+          <paper-tabs activate-event="">
+            <paper-tab link>
+              <a target="_blank" href="https://www.google.com/maps/contrib/112509277802753460018/photos"
+                 tabindex="-1">BILDER</a>
+            </paper-tab>
+          </paper-tabs>
+        </app-toolbar>
+      </app-header>
+
+
+      <iron-pages
+              selected="[[page]]"
+              attr-for-selected="name"
+              fallback-selection="view404"
+              role="main">
+        <home-page name="home"></home-page>
+        <p404-page name="p404"></p404-page>
+      </iron-pages>
+    </app-header-layout>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'guenztal-waschpark-app',
+
+      properties: {
+        page: {
+          type: String,
+          reflectToAttribute: true,
+          observer: '_pageChanged'
+        }
+      },
+
+      observers: [
+        '_routePageChanged(routeData.page)'
+      ],
+
+      _routePageChanged: function (page) {
+        this.page = page || 'home';
+      },
+
+      _pageChanged: function (page) {
+        // Load page import on demand. Show 404 page if fails
+        var resolvedPageUrl = this.resolveUrl('pages/' + page + '-page.html');
+        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+      },
+
+      _showPage404: function () {
+        this.page = 'p404';
+      }
+    });
+  </script>
+</dom-module>

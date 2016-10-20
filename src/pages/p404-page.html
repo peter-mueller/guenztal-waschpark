@@ -1,0 +1,63 @@
+<!--
+@license
+Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+
+<link rel="import" href="../../bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../../bower_components/iron-icons/iron-icons.html">
+
+<dom-module id="p404-page">
+  <template>
+    <style>
+      :host {
+        display: block;
+        color: white;
+        @apply(--layout-vertical);
+        @apply(--layout-center-center);
+        @apply(--layout-fit);
+        background-color: var(--primary-color);
+      }
+
+      #text {
+        @apply(--paper-font-code1);
+        padding: 24px;
+      }
+
+      #p404 {
+        @apply(--paper-font-display4);
+      }
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
+    </style>
+
+    <div id="p404">404</div>
+    <div id="text">
+      Oops! Looks like something was broken.
+    </div>
+    <a href="/" tabindex="-1">
+      <paper-button>
+        <iron-icon icon="arrow-back"></iron-icon>
+        BACK TO HOME
+      </paper-button>
+    </a>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'p404-page'
+    });
+  </script>
+</dom-module>
