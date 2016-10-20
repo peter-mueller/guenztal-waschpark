@@ -1,0 +1,17 @@
+{
+  "entrypoint": "index.html",
+  "shell": "src/guenztal-waschpark-app.html",
+  "fragments": [
+    "src/pages/home-page.html",
+    "src/pages/p404-page.html"
+  ],
+  "sourceGlobs": [
+   "src/**/*",
+   "images/**/*",
+   "bower.json"
+  ],
+  "includeDependencies": [
+    "manifest.json",
+    "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+  ]
+}
