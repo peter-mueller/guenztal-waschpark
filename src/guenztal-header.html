@@ -1,5 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+<link rel="import" href="../bower_components/paper-styles/color.html">
 
 <link rel="import" href="../bower_components/iron-icon/iron-icon.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
@@ -11,24 +12,30 @@
   <template>
     <style>
       :host {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
 
-        @apply(--layout-vertical);
+      #carwash {
+          --iron-icon-height: 64px;
+                    --iron-icon-width: 64px;
+
       }
 
       #care {
-        @apply(--paper-font-display1);
+        @apply --paper-font-display1;
         text-align: center;
         margin-bottom: 32px;
       }
 
       #question {
-        @apply(--paper-font-body2);
+        @apply --paper-font-body2;
         text-align: center;
       }
 
       #answer {
-        @apply(--paper-font-body2);
+        @apply --paper-font-body2;
         text-align: center;
         margin-bottom: 32px;
         color: var(--primary-color);
@@ -40,12 +47,11 @@
       }
 
       a {
-        @apply(--layout-self-center);
         text-decoration: none;
       }
     </style>
 
-    <iron-icon icon="maps:local-car-wash" class="self-center"></iron-icon>
+    <iron-icon icon="maps:local-car-wash" id="carwash"></iron-icon>
     <span id="care">Pflegen Sie Ihr Auto!</span>
 
     <span id="question">Suchen Sie einen günstigen Waschpark?</span>

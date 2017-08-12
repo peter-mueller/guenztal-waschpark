@@ -8,26 +8,16 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/paper-styles/typography.html">
+<link rel="import" href="guenztal-header.html">
+<link rel="import" href="time-table.html">
 
-<link rel="import" href="../bower_components/app-layout/app-header/app-header.html">
-<link rel="import" href="../bower_components/app-layout/app-header-layout/app-header-layout.html">
-<link rel="import" href="../bower_components/app-layout/app-scroll-effects/app-scroll-effects.html">
-<link rel="import" href="../bower_components/app-layout/app-toolbar/app-toolbar.html">
-
-<link rel="import" href="../bower_components/app-route/app-location.html">
-<link rel="import" href="../bower_components/app-route/app-route.html">
-
-<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
-<link rel="import" href="../bower_components/paper-tabs/paper-tab.html">
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
-
-<link rel="import" href="../bower_components/polymerfire/firebase-app.html">
-
+<link rel="import" href="photo-wall.html">
 <dom-module id="guenztal-waschpark-app">
   <template>
     <style>
-      :host {
+       :host {
         display: block;
 
         --primary-color: #00796B;
@@ -43,107 +33,77 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         color: var(--primary-text-color);
       }
 
-      a {
-        text-decoration: none;
+      #toolbar {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        grid-area: toolbar;
+        color:var(--primary-color);
+        padding-left: 48px;
+        @apply --paper-font-title;
+        @apply --shadow-elevation-4dp;
+
       }
 
-      app-header {
-        background-color: #f5f5f5;
-        color: var(--primary-color);
+      guenztal-header {
+        grid-area: about;
+        align-self: center;
+        margin: 1rem 0; 
       }
 
-      span[title] {
-        @apply(--paper-font-title);
-        color: var(--primary-color);
-        @apply(--layout-flex);
+      time-table {
+        grid-area: timetable;
       }
 
-      paper-tabs {
-        --paper-tabs-selection-bar-color: var(--primary-color);
-        height: 100%;
+      photo-wall {
+        grid-area: photos;
       }
 
-      paper-tab {
-        --paper-tab-ink: var(--primary-color);
+
+      @media(min-width: 768px) {
+        :host {
+          display: grid;
+          grid-gap: 1rem;
+          grid-template-columns: 1fr 1fr;
+          grid-template-areas: 
+          "toolbar toolbar" 
+          "about timetable"
+          "photos photos";
+        }
       }
 
-      paper-tab[link] a {
-        color: var(--primary-color);
-        @apply(--layout-horizontal);
-        @apply(--layout-center-center);
+      @media(min-width: 1300px) {
+        :host {
+          display: grid;
+          grid-template-columns: 1fr 2fr 1fr;
+          grid-template-areas: 
+          "toolbar toolbar toolbar" 
+          ". about ."
+          ". photos timetable"
+        }
 
+        time-table {
+                  max-width: 256px;
+        }
       }
     </style>
-
-    <app-location route="{{route}}"></app-location>
-    <app-route
-            route="{{route}}"
-            pattern="/:page"
-            data="{{routeData}}"
-            tail="{{subroute}}"></app-route>
+    <header id="toolbar">
+      <span>    GÜNZTAL WASCHPARK</span>
+    </header>
 
 
-    <firebase-app auth-domain="guenztal-waschpark.firebaseapp.com"
-                  database-url="https://guenztal-waschpark.firebaseio.com/"
-                  api-key="AIzaSyDK5MIcSP06rWPzjY7qCpmjXM4eKOuRJd4"></firebase-app>
+    <guenztal-header></guenztal-header>
 
+    <time-table></time-table>
 
-    <app-header-layout has-scrolling-region fullbleed>
+    <photo-wall></photo-wall>
 
-      <app-header fixed effects="waterfall">
-        <app-toolbar>
-          <span title>GÜNZTAL WASCHPARK</span>
-
-          <paper-tabs activate-event="">
-            <paper-tab link>
-              <a target="_blank" href="https://www.google.com/maps/contrib/112509277802753460018/photos"
-                 tabindex="-1">BILDER</a>
-            </paper-tab>
-          </paper-tabs>
-        </app-toolbar>
-      </app-header>
-
-
-      <iron-pages
-              selected="[[page]]"
-              attr-for-selected="name"
-              fallback-selection="view404"
-              role="main">
-        <home-page name="home"></home-page>
-        <p404-page name="p404"></p404-page>
-      </iron-pages>
-    </app-header-layout>
   </template>
-
   <script>
-    Polymer({
-      is: 'guenztal-waschpark-app',
-
-      properties: {
-        page: {
-          type: String,
-          reflectToAttribute: true,
-          observer: '_pageChanged'
-        }
-      },
-
-      observers: [
-        '_routePageChanged(routeData.page)'
-      ],
-
-      _routePageChanged: function (page) {
-        this.page = page || 'home';
-      },
-
-      _pageChanged: function (page) {
-        // Load page import on demand. Show 404 page if fails
-        var resolvedPageUrl = this.resolveUrl('pages/' + page + '-page.html');
-        this.importHref(resolvedPageUrl, null, this._showPage404, true);
-      },
-
-      _showPage404: function () {
-        this.page = 'p404';
-      }
-    });
+    'use strict'
+    class GuenztalWaschparkApp extends Polymer.Element {
+      static get is() { return 'guenztal-waschpark-app'; }
+    }
+    window.customElements.define(GuenztalWaschparkApp.is, GuenztalWaschparkApp);
   </script>
 </dom-module>

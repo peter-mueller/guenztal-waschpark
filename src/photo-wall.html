@@ -1,0 +1,51 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../bower_components/iron-image/iron-image.html">
+
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id="photo-wall">
+    <template>
+        <style>
+             :host {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(400px,1fr));
+                grid-flow: row dense ;
+                grid-gap: 1rem;
+             }
+
+             img {
+                 background-color: lightgrey;
+                 width: 100%;
+             }
+        </style>
+
+
+        <iron-ajax id="imgur" on-response="_onImages" auto="" url="https://api.imgur.com/3/album/BXEBe/images" headers='{"Authorization": "Client-ID 663b14118ac1cd8"}'
+            handle-as="json" debounce-duration="300">
+        </iron-ajax>
+
+        <template is="dom-repeat" items="[[images]]">
+            <img src$="[[item.link]]">
+        </template>
+    </template>
+    <script>
+        class PhotoWall extends Polymer.Element {
+            static get is() { return 'photo-wall'; }
+            static get properties() {
+                return {
+                    images: {
+                        type: Array,
+                        value: [],
+                    }
+                }
+            }
+
+            _onImages(e) {
+                console.log(e.detail.response.data);
+                this.set("images", e.detail.response.data)
+            }
+        }
+        window.customElements.define(PhotoWall.is, PhotoWall);
+    </script>
+</dom-module>
