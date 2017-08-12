@@ -11,7 +11,8 @@
   ],
   "extraDependencies": [
     "bower_components\\webcomponentsjs\\*.js",
-    "manifest.json"
+    "manifest.json",
+    "bower_components\\webcomponentsjs\\webcomponents-loader.js"
   ],
   "builds": [
     {
