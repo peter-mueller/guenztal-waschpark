@@ -11,6 +11,6 @@
   ],
     "builds": [{
   "preset": "es6-bundled",
-  "addServiceWorker": false
+  "basePath": "/guenztal-waschpark/"
 }]
 }

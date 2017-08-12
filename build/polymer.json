@@ -30,9 +30,10 @@
         "minify": true
       },
       "bundle": true,
-      "addServiceWorker": false,
+      "addServiceWorker": true,
       "addPushManifest": true,
-      "preset": "es6-bundled"
+      "preset": "es6-bundled",
+      "basePath": "/guenztal-waschpark/"
     }
   ]
 }
