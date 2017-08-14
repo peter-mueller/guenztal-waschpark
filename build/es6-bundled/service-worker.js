@@ -37,7 +37,7 @@
 /* eslint-disable indent, no-unused-vars, no-multiple-empty-lines, max-nested-callbacks, space-before-function-paren, quotes, comma-spacing */
 'use strict';
 
-var precacheConfig = [["index.html","d32a1196416e736422c326927ed2f8a9"],["manifest.json","884fa69896cd2a6de8df8957f67865e2"],["src/guenztal-waschpark-app.html","ae377b18154f1843fbf1bb4c09d5f1ba"]];
+var precacheConfig = [["index.html","0b1b7dd8983fcbcd821036978eebaeba"],["manifest.json","884fa69896cd2a6de8df8957f67865e2"],["src/guenztal-waschpark-app.html","e38f85ab3ea8a2e294828900126ed544"]];
 var cacheName = 'sw-precache-v3--' + (self.registration ? self.registration.scope : '');
 
 

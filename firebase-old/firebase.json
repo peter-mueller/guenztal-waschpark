@@ -1,0 +1,12 @@
+{
+  "hosting": {
+    "public": "./",
+    "redirects": [
+      {
+        "source": "**",
+        "destination": "http://peter-mueller.github.io/guenztal-waschpark/",
+        "type" : 301
+      }
+    ]
+  }
+}
