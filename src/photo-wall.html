@@ -7,16 +7,16 @@
 <dom-module id="photo-wall">
     <template>
         <style>
-             :host {
-            }
+            :host {}
 
             #grid {
                 display: grid;
-                grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
                 grid-flow: row dense;
                 grid-gap: 1rem;
             }
+
             iron-image {
                 background-color: lightgrey;
                 width: 100%;
@@ -26,20 +26,27 @@
             iframe {
                 width: 100%;
                 padding-bottom: 1rem;
+                height: 300px;
             }
+
+            @media(min-width: 1300px) {
+                iframe {
+                    height: auto;
+                }
         </style>
 
-        <iframe src="https://www.google.com/maps/embed?pb=!1m0!4v1509190350483!6m8!1m7!1sCAoSLEFGMVFpcE0wSndQZkRVQlc5VmJ4OEt3Wms0emQyUm5ESjI5OFhib0JONDFh!2m2!1d48.027309680586!2d10.335638267446!3f13.22161771713542!4f5.332983332520158!5f0.4000000000000002" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m0!4v1509190350483!6m8!1m7!1sCAoSLEFGMVFpcE0wSndQZkRVQlc5VmJ4OEt3Wms0emQyUm5ESjI5OFhib0JONDFh!2m2!1d48.027309680586!2d10.335638267446!3f13.22161771713542!4f5.332983332520158!5f0.4000000000000002"
+            width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
 
         <iron-ajax id="imgur" on-response="_onImages" auto="" url="https://api.imgur.com/3/album/BXEBe/images" headers='{"Authorization": "Client-ID 663b14118ac1cd8"}'
             handle-as="json" debounce-duration="300">
         </iron-ajax>
 
         <div id="grid">
-        <template is="dom-repeat" items="[[images]]">
-            <iron-image preload fade sizing="cover" src="http://i.imgur.com/[[item.id]]l.jpg">
-        </template>
-    </div>
+            <template is="dom-repeat" items="[[images]]">
+                <iron-image preload fade sizing="cover" src="http://i.imgur.com/[[item.id]]l.jpg">
+            </template>
+        </div>
     </template>
     <script>
         class PhotoWall extends Polymer.Element {
